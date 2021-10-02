@@ -1,21 +1,42 @@
 <template>
   <div class="container" style="float: right">
-    <div class="row">
-      <div class="col-lg-1">
-        <p>1</p>
-      </div>
-      <div v-for="index in 3" :key="index.id">
-        <!-- v-if="objects[index - 1].age == 15" -->
-        <div class="col-lg-1">
-          <div
-            :class="{
-              'ageSpan-deact': !classChange,
-              'ageSpan-act': classChange,
-            }"
-          ></div>
+    <div v-for="rowIndex in 10" :key="rowIndex.id">
+      <div class="row">
+        <div class="col-sm-1">
+          <p>{{ 1000 - (rowIndex - 1) * 100 }} BC</p>
         </div>
+        <div v-for="index in 10" :key="index.id">
+          <!-- v-if="objects[index - 1].age == 15" -->
+          <div class="col-sm-1">
+            <div
+              :class="{
+                'ageSpan-deact': !classChange,
+                'ageSpan-act': classChange,
+              }"
+            ></div>
+          </div>
+        </div>
+        <div class="col-sm-1 mar">{{ 1000 - rowIndex * 100 + 1 }} BC</div>
       </div>
-      <div class="col-lg-1 mar">100</div>
+    </div>
+    <div v-for="rowIndex in 21" :key="rowIndex.id">
+      <div class="row">
+        <div class="col-sm-1">
+          <p>{{ 1 + (rowIndex - 1) * 100 }} AC</p>
+        </div>
+        <div v-for="index in 10" :key="index.id">
+          <!-- v-if="objects[index - 1].age == 15" -->
+          <div class="col-sm-1">
+            <div
+              :class="{
+                'ageSpan-deact': !classChange,
+                'ageSpan-act': classChange,
+              }"
+            ></div>
+          </div>
+        </div>
+        <div class="col-sm-1">{{ rowIndex * 100 }} AC</div>
+      </div>
     </div>
   </div>
 </template>
@@ -51,7 +72,7 @@ changetheClass(){
   background-color: yellow;
 }
 .ageSpan-deact {
-  margin: 8px 4px 0px 4px;
+  margin: 0.05% 0.025% 0% 0.025%;
   height: 8px;
   width: 8px;
   background-color: grey;
