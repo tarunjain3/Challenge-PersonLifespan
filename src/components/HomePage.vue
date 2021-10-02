@@ -38,10 +38,18 @@
         <div class="col-sm-1">{{ rowIndex * 100 }} AC</div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h1>
+          {{ personName }}
+        </h1>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 /* eslint-disable */
+import axios from "axios";
 export default {
   name: "HelloWorld",
   props: {
@@ -49,20 +57,42 @@ export default {
   },
   data() {
     return {
-      classChange : true ,
-      objects: [
-        { name: "abc", age: 10 },
-        { name: "def", age: 15 },
-        { name: "xyz", age: 15 },
-      ],
+      classChange: true,
+      personName: "Initialize",
+      lifeSpanObj: [],
     };
   },
-   methods: {
-changetheClass(){
-  this.classChange = !this.classChange;
-}
-      
-    }
+  methods: {
+    changetheClass() {
+      this.classChange = !this.classChange;
+    },
+    changeName() {
+      this.personName = "def  abc";
+      this.lifeSpanObj.forEach((element, i) => {
+        setTimeout(function () {
+          this.personName = element.name;
+          console.log(this.personName);
+          console.log(i);
+        }, i * 300);
+      });
+    },
+  },
+  mounted() {
+    console.log("calling on page load");
+    axios({
+      method: "GET",
+      url: "https://dev-util.edyst.com/challenge/person/-1100?end_yob=2000",
+    }).then(
+      (result) => {
+        console.log("success hit");
+        this.lifeSpanObj = result.data;
+        return this.changeName();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  },
 };
 </script>
 <style scoped>
