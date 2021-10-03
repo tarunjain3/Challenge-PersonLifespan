@@ -10,8 +10,8 @@
           <div class="col-sm-1">
             <div
               v-bind:class="{
-                'ageSpan-deact': !rowBcArr.includes(rowIndex),
-                'ageSpan-act': rowBcArr.includes(rowIndex),
+                'ageSpan-deact': true,
+                'ageSpan-act': false,
               }"
             ></div>
           </div>
@@ -94,8 +94,8 @@ export default {
         const element = this.lifeSpanObj[index];
         setTimeout(() => {
           // this.rowArr.splice(0);
-          this.rowBcArr.splice(0);
-          this.colArr.splice(0);
+          // this.rowBcArr.splice(0);
+          // this.colArr.splice(0);
           console.log("row number while clearing : " + this.rowNumber);
           this.arr[this.rowNumber] = [];
           console.log(this.arr);
