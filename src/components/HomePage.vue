@@ -10,8 +10,8 @@
           <div class="col-sm-1">
             <div
               :class="{
-                'ageSpan-deact': !classChange,
-                'ageSpan-act': classChange,
+                'ageSpan-deact': classChange,
+                'ageSpan-act': !classChange,
               }"
             ></div>
           </div>
@@ -28,9 +28,11 @@
           <!-- v-if="objects[index - 1].age == 15" -->
           <div class="col-sm-1">
             <div
-              :class="{
-                'ageSpan-deact': !classChange,
-                'ageSpan-act': classChange,
+              v-bind:class="{
+                'ageSpan-deact':
+                  ! (dob >= 1 + (rowIndex - 1) * 100 && yod <= rowIndex * 100),
+                'ageSpan-act':
+                  dob >= 1 + (rowIndex - 1) * 100 && yod <= rowIndex * 100,
               }"
             ></div>
           </div>
@@ -58,8 +60,10 @@ export default {
   data() {
     return {
       classChange: true,
-      personName: "Initialize",
+      personName: "",
       lifeSpanObj: [],
+      dob : 0,
+      yod : 0,
     };
   },
   methods: {
@@ -67,14 +71,19 @@ export default {
       this.classChange = !this.classChange;
     },
     changeName() {
-      this.personName = "def  abc";
-      this.lifeSpanObj.forEach((element, i) => {
-        setTimeout(function () {
+      console.log(this.lifeSpanObj);
+      for (let index = 0; index < this.lifeSpanObj.length; index++) {
+        const element = this.lifeSpanObj[index];
+        setTimeout(() => {
           this.personName = element.name;
-          console.log(this.personName);
-          console.log(i);
-        }, i * 300);
-      });
+          this.dob = element.yob;
+          this.yod = element.yod;
+          console.log(index);
+          console.log(this.dob);
+        }, index * 2000);
+
+        console.log(this.personName);
+      }
     },
   },
   mounted() {
