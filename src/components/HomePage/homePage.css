@@ -1,0 +1,11 @@
+.ageSpan-act {
+    height: 16px;
+    width: 16px;
+    background-color: yellow;
+  }
+  .ageSpan-deact {
+    margin: 0.05% 4px 0px 4px;
+    height: 8px;
+    width: 8px;
+    background-color: grey;
+  }
