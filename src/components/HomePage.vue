@@ -58,24 +58,21 @@ export default {
     return {
       personName: "",
       lifeSpanObj: [],
-      rowBcArr: [],
       arr: [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],],
       rowNumber: 0,
       bcRowNumber: 0,
       rowNumberToClear: -1,
       bcRowNumberToClear: -1,
-      bcArr: [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],],
+      bcArr: [[],[],[],[],[],[],[],[],[],[],[],],
     };
   },
   methods: {
     changeName() {
-      // console.log(this.lifeSpanObj);
       for (let index = 0; index < this.lifeSpanObj.length; index++) {
         const element = this.lifeSpanObj[index];
         setTimeout(() => {
-          this.rowBcArr.splice(0);
           this.arr[this.rowNumber] = [];
-          this.arr[this.bcRowNumber] = [];
+          this.bcArr[this.bcRowNumber] = [];
           if (this.bcRowNumberToClear >= 0) {
               this.bcArr[this.bcRowNumberToClear] = [];
               this.bcRowNumberToClear = -1;
@@ -88,15 +85,6 @@ export default {
           this.personName = element.name;
           if (element.yob < 0) {
             this.bcRowNumber = 10 - Math.floor((-1 * element.yob) / 100);
-            this.arr[this.bcRowNumber] = [];
-            if (this.bcRowNumberToClear >= 0) {
-              this.bcArr[this.bcRowNumberToClear] = [];
-              this.bcRowNumberToClear = -1;
-            }
-            if (this.rowNumberToClear >= 0) {
-              this.arr[this.rowNumberToClear] = [];
-              this.rowNumberToClear = -1;
-            }
             let changeCen = element.yob;
             for (let i = element.yob; i < element.yod; i = i + 10) {
               let x = Math.abs(i - Math.ceil(i / 100) * 100);
@@ -107,14 +95,14 @@ export default {
               }
               let col = x - (x % 10);
               col = col / 10
-              this.bcArr[this.bcRowNumber].push(10 - col );
+              this.bcArr[this.bcRowNumber].push(9 - col);
               // console.log(
               //   "here is i : " +
               //     i +
               //     "bcrownumber : " +
               //     this.bcRowNumber +
               //     "and col : " +
-              //     col / 10 +
+              //     (9 - col) +
               //     "and lief between" +
               //     element.yob +
               //     "and " +
@@ -123,15 +111,6 @@ export default {
             }
           } else {
             this.rowNumber = Math.floor(element.yob / 100) + 1;
-            this.bcArr[this.bcRowNumber] = [];
-            if (this.bcRowNumberToClear >= 0) {
-              this.bcArr[this.bcRowNumberToClear] = [];
-              this.bcRowNumberToClear = -1;
-            }
-            if (this.rowNumberToClear >= 0) {
-              this.arr[this.rowNumberToClear] = [];
-              this.rowNumberToClear = -1;
-            }
             let changeCen = element.yob;
             for (let i = element.yob; i < element.yod; i = i + 10) {
               let x = i - Math.floor(i / 100) * 100;
