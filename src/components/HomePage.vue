@@ -1,48 +1,47 @@
 <template>
-  <div class="container" style="float: right">
-    <div v-for="rowIndex in 10" :key="rowIndex.id">
-      <div class="row">
-        <div class="col-sm-1">
-          <p>{{ 1000 - (rowIndex - 1) * 100 }} BC</p>
-        </div>
-        <div v-for="index in 10" :key="index.id">
-          <div class="col-sm-1">
-            <div
-              v-bind:class="{
-                'ageSpan-deact': !bcArr[rowIndex - 1].includes(index - 1),
-                'ageSpan-act': bcArr[rowIndex - 1].includes(index - 1),
-              }"
-            ></div>
+  <div class="container" style="font-size : 1vw">
+    <div class="mar">
+      <div v-for="rowIndex in 10" :key="rowIndex.id">
+        <div class="row">
+          <div class="col-sm-2">
+            <p>{{ 1000 - (rowIndex - 1) * 100 }} BC</p>
           </div>
+          <div v-for="index in 10" :key="index.id">
+            <div class="col-sm-1">
+              <div
+                v-bind:class="{
+                  'ageSpan-deact': !bcArr[rowIndex - 1].includes(index - 1),
+                  'ageSpan-act': bcArr[rowIndex - 1].includes(index - 1),
+                }"
+              ></div>
+            </div>
+          </div>
+          <div class="col-sm-2">{{ 1000 - rowIndex * 100 + 1 }} BC</div>
         </div>
-        <div class="col-sm-1 mar">{{ 1000 - rowIndex * 100 + 1 }} BC</div>
+      </div>
+      <div v-for="rowIndex in 21" :key="rowIndex.id">
+        <div class="row">
+          <div class="col-sm-2">
+            <p>{{ 1 + (rowIndex - 1) * 100 }} AD</p>
+          </div>
+          <div v-for="index in 10" :key="index.id">
+            <div class="col-sm-1">
+              <div
+                v-bind:class="{
+                  'ageSpan-deact': !arr[rowIndex - 1].includes(index - 1),
+                  'ageSpan-act': arr[rowIndex - 1].includes(index - 1),
+                }"
+              ></div>
+            </div>
+          </div>
+          <div class="col-sm-2">{{ rowIndex * 100 }} AD</div>
+        </div>
       </div>
     </div>
-    <div v-for="rowIndex in 21" :key="rowIndex.id">
-      <div class="row">
-        <div class="col-sm-1">
-          <p>{{ 1 + (rowIndex - 1) * 100 }} AD</p>
-        </div>
-        <div v-for="index in 10" :key="index.id">
-          <div class="col-sm-1">
-            <div
-              v-bind:class="{
-                'ageSpan-deact': !arr[rowIndex - 1].includes(index - 1),
-                'ageSpan-act': arr[rowIndex - 1].includes(index - 1),
-              }"
-            ></div>
-          </div>
-        </div>
-        <div class="col-sm-1">{{ rowIndex * 100 }} AD</div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm-12">
-        <h1>
-          {{ personName }}
-        </h1>
-      </div>
+    <div>
+      <h1>
+        {{ personName }}
+      </h1>
     </div>
   </div>
 </template>
@@ -148,14 +147,17 @@ export default {
 </script>
 <style scoped>
 .ageSpan-act {
-  height: 16px;
-  width: 16px;
+  height: 0.8vw;
+  width: 0.8vw;
   background-color: yellow;
 }
 .ageSpan-deact {
-  margin: 0.05% 4px 0px 4px;
-  height: 8px;
-  width: 8px;
+  margin: 0.08% 0.165vw 0vw 0.165vw;
+  height: 0.5vw;
+  width: 0.5vw;
   background-color: grey;
+}
+.mar{
+  margin-left:18%;
 }
 </style>
