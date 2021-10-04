@@ -157,7 +157,7 @@ export default {
     }).then(
       (result) => {
         console.log("success hit");
-        this.lifeSpanObj = result.data;
+        this.lifeSpanObj = result.data.sort((a, b) => { return a.yob - b.yob;});
         return this.changeName();
       },
       (error) => {
