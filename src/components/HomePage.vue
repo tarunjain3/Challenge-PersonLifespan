@@ -1,23 +1,5 @@
 <template>
-  <div class="container">
-    <!-- <div v-for="rowIndex in 10" :key="rowIndex.id">
-      <div class="row">
-        <div class="col-sm-1">
-          <p>{{ 1000 - (rowIndex - 1) * 100 }} BC</p>
-        </div>
-        <div v-for="index in 10" :key="index.id">
-          <div class="col-sm-1">
-            <div
-              v-bind:class="{
-                'ageSpan-deact': true,
-                'ageSpan-act': false,
-              }"
-            ></div>
-          </div>
-        </div>
-        <div class="col-sm-1 mar">{{ 1000 - rowIndex * 100 + 1 }} BC</div>
-      </div>
-    </div> -->
+  <div class="container" style="float: right">
     <div v-for="rowIndex in 10" :key="rowIndex.id">
       <div class="row">
         <div class="col-sm-1">
@@ -27,8 +9,8 @@
           <div class="col-sm-1">
             <div
               v-bind:class="{
-                'ageSpan-deact': !rowBcArr.includes(0),
-                'ageSpan-act': rowBcArr.includes(0),
+                'ageSpan-deact': !bcArr[rowIndex - 1].includes(index - 1),
+                'ageSpan-act': bcArr[rowIndex - 1].includes(index - 1),
               }"
             ></div>
           </div>
@@ -77,12 +59,12 @@ export default {
       personName: "",
       lifeSpanObj: [],
       rowBcArr: [],
-      arr: [[]],
+      arr: [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],],
       rowNumber: 0,
       bcRowNumber: 0,
       rowNumberToClear: -1,
       bcRowNumberToClear: -1,
-      bcArr: [[]],
+      bcArr: [[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],],
     };
   },
   methods: {
@@ -124,7 +106,8 @@ export default {
                 changeCen = i;
               }
               let col = x - (x % 10);
-              this.bcArr[this.bcRowNumber].push(col / 10);
+              col = col / 10
+              this.bcArr[this.bcRowNumber].push(10 - col );
               // console.log(
               //   "here is i : " +
               //     i +
@@ -168,10 +151,6 @@ export default {
   },
   mounted() {
     console.log("calling on page load");
-    for (let index = 0; index < 21; index++) {
-      this.arr[index] = [];
-      this.bcArr[index] = [];
-    }
     axios({
       method: "GET",
       url: "https://dev-util.edyst.com/challenge/person/-1100?end_yob=2000",
@@ -200,5 +179,4 @@ export default {
   width: 8px;
   background-color: grey;
 }
-
 </style>
